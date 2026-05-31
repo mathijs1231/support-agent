@@ -1,0 +1,18 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnSignIn
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_ypjGKL
+      conditions:
+        - id: conditionItem_7XYIIR
+          actions:
+            - kind: SendActivity
+              id: sendMessage_1jHUNO
+              activity: Hello! Before I can help you, you need to sign in.
+
+    - kind: OAuthInput
+      id: gOjhZA
+      title: Sign in
+      text: Sign in to continue

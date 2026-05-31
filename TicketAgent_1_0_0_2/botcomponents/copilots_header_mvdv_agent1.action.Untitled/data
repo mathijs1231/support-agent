@@ -1,0 +1,6 @@
+kind: TaskDialog
+action:
+  kind: InvokeFlowTaskAction
+  flowId: 74f336a3-8baa-a692-7e4b-f64d8c34d05b
+
+outputMode: All

@@ -1,0 +1,7 @@
+<botcomponentcollection schemaname="bot_componentcollection_application_insights_telemetrie">
+  <description>Dit is een solution voor het automatisch versturen van telemetrie events.</description>
+  <iscustomizable>1</iscustomizable>
+  <name>Application Insights Telemetrie</name>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponentcollection>

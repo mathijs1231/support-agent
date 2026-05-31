@@ -1,0 +1,10 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.action.Untitled">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Untitled</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>1</statecode>
+  <statuscode>2</statuscode>
+</botcomponent>

@@ -1,0 +1,11 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.topic.Signin">
+  <componenttype>9</componenttype>
+  <description>Dit systeemonderwerp wordt geactiveerd als de agent de gebruiker moet aanmelden of als de agent vereist dat de gebruiker zich aanmeldt</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Aanmelden</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

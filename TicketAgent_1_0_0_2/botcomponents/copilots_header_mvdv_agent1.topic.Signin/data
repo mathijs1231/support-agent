@@ -1,0 +1,19 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnSignIn
+  id: main
+  actions:
+    - kind: ConditionGroup
+      id: conditionGroup_ypjGKL
+      conditions:
+        - id: conditionItem_7XYIIR
+          condition: =System.SignInReason = SignInReason.SignInRequired
+          actions:
+            - kind: SendActivity
+              id: sendMessage_1jHUNO
+              activity: Hallo! Voordat ik u kan helpen, moet u zich aanmelden.
+
+    - kind: OAuthInput
+      id: gOjhZA
+      title: Aanmelden
+      text: Meld u aan om door te gaan

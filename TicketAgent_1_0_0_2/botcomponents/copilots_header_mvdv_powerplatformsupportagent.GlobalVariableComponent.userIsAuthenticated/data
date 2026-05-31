@@ -1,0 +1,16 @@
+kind: Variable
+name: userIsAuthenticated
+isExternalInitializationAllowed: false
+isOutputToExternalCallers: false
+initializationTimeoutInMilliseconds: 0
+aIVisibility: Hidden
+canEdit: true
+dataType:
+  $kind: Boolean
+  diagnostics:
+
+displayNameForDataType: boolean
+isUserScope: false
+propertyPath: Global.userIsAuthenticated
+variableName: userIsAuthenticated
+variableTypePrefix: Global

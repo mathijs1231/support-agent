@@ -1,0 +1,6 @@
+kind: Variable
+name: Var1
+scope: Conversation
+isExternalInitializationAllowed: true
+isOutputToExternalCallers: false
+initializationTimeoutInMilliseconds: 0

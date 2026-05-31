@@ -1,0 +1,13 @@
+kind: TaskDialog
+modelDisplayName: Freshdesk Ticket Insights Agent
+modelDescription: The Freshdesk Ticket Insights Assistant is designed to retrieve and present ticket data from Freshdesk in a clear and structured way. It enables support teams to quickly access key information such as ticket status, priority, requester details, and history without manual lookup. The agent focuses solely on providing accurate and up to date ticket information, ensuring that users have immediate visibility into ongoing support cases.
+outputs:
+  - propertyName: isAuthenticated
+
+action:
+  kind: InvokeConnectedAgentTaskAction
+  botSchemaName: copilots_header_mvdv_agent1
+  historyType:
+    kind: ConversationHistory
+
+  shouldSendStartConversation: false

@@ -1,0 +1,25 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Start Over
+    triggerQueries:
+      - let's start over
+      - start over
+      - begin again
+      - restart
+      - start again
+      - reboot
+
+  actions:
+    - kind: Question
+      id: question_zguoVV
+      prompt: Are you sure you want to restart the conversation?
+
+    - kind: ConditionGroup
+      id: conditionGroup_lvx2zV
+      elseActions:
+        - kind: SendActivity
+          id: sendMessage_lk2CyQ
+          activity: OK, let's continue.

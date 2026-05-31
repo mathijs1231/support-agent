@@ -1,0 +1,27 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Begroeting
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Goedemiddag
+      - Goeiemiddag
+      - Goedemorgen
+      - Goeiemorgen
+      - Hallo
+      - Hé
+      - Hoi
+
+  actions:
+    - kind: SendActivity
+      id: sendMessage_abmysR
+      activity:
+        text:
+          - Hallo, hoe kan ik u vandaag van dienst zijn?
+        speak:
+          - Hallo, <break strength="medium" /> hoe kan ik u helpen?
+
+    - kind: CancelAllDialogs
+      id: cancelAllDialogs_01At22

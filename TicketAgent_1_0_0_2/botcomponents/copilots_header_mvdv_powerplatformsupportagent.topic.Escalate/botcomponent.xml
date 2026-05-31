@@ -1,0 +1,13 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.topic.Escalate">
+  <componenttype>9</componenttype>
+  <description>Dit systeemonderwerp wordt geactiveerd wanneer de gebruiker aangeeft dat deze met een medewerker wil spreken.
+U kunt configureren hoe de agent met scenario's voor overdracht naar een mens omgaat in de agentinstellingen.
+Als uw agent geen escalaties afhandelt, moet dit onderwerp worden uitgeschakeld.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Escaleren</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

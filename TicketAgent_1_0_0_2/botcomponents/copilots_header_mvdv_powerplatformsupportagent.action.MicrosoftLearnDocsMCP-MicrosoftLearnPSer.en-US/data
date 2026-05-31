@@ -1,0 +1,7 @@
+kind: TaskDialog
+modelDisplayName: Microsoft Learn Docs MCP Server
+modelDescription: MCP Server to search Microsoft Learn content
+action:
+  kind: InvokeExternalAgentTaskAction
+  connectionProperties:
+    usageDescription: This tool is used to analyze the error that has been received by the agent. It should use the mvdv_errorpayload message to analyze the error and root cause. It also should use clientdata to analyze the flow and what should be fixed!

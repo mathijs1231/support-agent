@@ -1,0 +1,95 @@
+kind: AdaptiveDialog
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnEscalate
+  id: main
+  intent:
+    displayName: Escaleren
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Praat met agent
+      - Praten met agent
+      - Praten met een persoon
+      - Praat met een persoon
+      - Praat met iemand
+      - Praten met iemand
+      - Terugbellen
+      - Bel terug
+      - Bel klantenservice
+      - Klantenservice bellen
+      - Belt u me alstublieft
+      - Bel me alstublieft
+      - Bel me alsjeblieft
+      - Ondersteuning bellen
+      - Bel ondersteuning
+      - Technische ondersteuning bellen
+      - Bel technische ondersteuning
+      - Kan een agent mij bellen
+      - Kan een agent me bellen
+      - Kan ik bellen
+      - Kan ik met iemand anders spreken
+      - Kan ik iemand anders spreken
+      - Kan ik ondersteuning van een echte agent krijgen
+      - Kan ik worden doorverbonden met een persoon
+      - Kan ik een nummer bellen of kan ik worden gebeld
+      - Kan een vertegenwoordiger mij bellen
+      - Kan een vertegenwoordiger me bellen
+      - Kan ik een telefoongesprek plannen
+      - Kan ik met een vertegenwoordiger spreken
+      - Kan ik een vertegenwoordiger spreken
+      - Kan ik met een mens spreken
+      - Kan ik een mens spreken
+      - Kan ik met een persoon spreken
+      - Kan ik een persoon spreken
+      - Kan ik met een menselijke assistent spreken
+      - Kan ik een menselijke assistent spreken
+      - Kan iemand mij bellen
+      - Kan iemand me bellen
+      - Chatten met een mens
+      - Chat met een mens
+      - Chatten met een vertegenwoordiger
+      - Chat met een vertegenwoordiger
+      - Chatten met agent
+      - Chat met agent
+      - Chat met iemand
+      - Met iemand chatten
+      - Verbindt u me door met een live agent
+      - Verbind me door met een live agent
+      - Verbindt u me door met een persoon
+      - Verbind me door met een persoon
+      - Kan iemand telefonisch contact met mij opnemen
+      - Kan iemand telefonisch contact met me opnemen
+      - Klantagent
+      - Klantvertegenwoordiger
+      - Klantenservice
+      - Ik wil graag dat een manager contact met mij opneemt
+      - Ik wil graag dat een manager contact met me opneemt
+      - Ik heb klantenservice nodig
+      - Ik heb de klantenservice nodig
+      - Ik heb hulp van een persoon nodig
+      - Ik wil graag met een live agent spreken
+      - Ik wil graag een live agent spreken
+      - Ik wil graag met een specialist spreken
+      - Ik wil graag een specialist spreken
+      - Ik wil graag met de klantenservice spreken
+      - Ik wil graag de klantenservice spreken
+      - Ik wil graag live ondersteuning ontvangen
+      - Ik wil graag met een consultant spreken
+      - Ik wil graag een consultant spreken
+      - Ik wil graag met een live technicus spreken
+      - Ik wil graag een live technicus spreken
+      - Ik wil graag met een medewerker spreken
+      - Ik wil graag een medewerker spreken
+      - Ik wil graag met een technicus spreken
+      - Ik wil graag een technicus spreken
+      - Praten met medewerker van de technische ondersteuning
+      - Praat met medewerker van de technische ondersteuning
+
+  actions:
+    - kind: SendActivity
+      id: sendMessage_s39DCt
+      conversationOutcome: Escalated
+      activity: |-
+        Escalatie naar een medewerker is momenteel niet geconfigureerd voor deze copilot, maar dit is de plaats waar de agent informatie kan geven over hoe u op een andere manier contact met iemand kunt opnemen.
+
+        Kan ik u nog ergens anders mee helpen?

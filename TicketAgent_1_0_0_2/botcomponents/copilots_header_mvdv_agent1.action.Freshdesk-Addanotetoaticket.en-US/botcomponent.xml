@@ -1,0 +1,14 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.action.Freshdesk-Addanotetoaticket.en-US">
+  <componenttype>10</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <language>1033</language>
+  <name>Freshdesk - Add a note to a ticket (en-US)</name>
+  <parentbotcomponentid>
+    <schemaname>copilots_header_mvdv_agent1.action.Freshdesk-Addanotetoaticket</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,31 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnGeneratedResponse
+  id: main
+  actions:
+    - kind: Foreach
+      id: foreach_ICgsg0
+      items: =System.Response.Citations
+      value: init:Topic.KnowledgeUsed
+      index: init:Topic.LoopIndex1
+      actions:
+        - kind: LogCustomTelemetryEvent
+          id: DgH7eo
+          eventName: KnowledgeUsed
+          properties: |-
+            =ParseJSON(
+                JSON(
+                    {
+                        Name: Topic.KnowledgeUsed.Name,
+                        TextUsed: Topic.KnowledgeUsed.Text,
+                        URL: Topic.KnowledgeUsed.Url, 
+                        OriginalQuestion: System.Activity.Text
+                    }
+                )
+            )
+
+    - kind: EndDialog
+      id: ax1o17
+
+inputType: {}
+outputType: {}

@@ -1,0 +1,17 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Bedankt
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - bedankt
+      - dankuwel/dankjewel
+      - heel hartelijk bedankt
+      - dankje
+
+  actions:
+    - kind: SendActivity
+      id: sendMessage_9iz6v7
+      activity: Graag gedaan.

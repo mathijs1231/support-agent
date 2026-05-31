@@ -1,0 +1,29 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: ticketId
+
+modelDisplayName: Add a note to a ticket
+modelDescription: Add a private or public note to a ticket.
+outputs:
+  - propertyName: body
+
+  - propertyName: body_text
+
+  - propertyName: created_at
+
+  - propertyName: private
+
+  - propertyName: ticket_id
+
+  - propertyName: updated_at
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: copilots_header_mvdv_agent1.shared_freshdesk.db4f1c5441524ad8ba651f218f8d6a9c
+  connectionProperties:
+    mode: Maker
+
+  operationId: AddNote
+
+outputMode: All

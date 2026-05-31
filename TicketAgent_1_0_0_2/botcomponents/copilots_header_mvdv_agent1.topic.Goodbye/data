@@ -1,0 +1,44 @@
+kind: AdaptiveDialog
+startBehavior: CancelOtherTopics
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Tot ziens
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - Tot ziens
+      - Voorlopig tot ziens
+      - Tot ziens maar weer
+      - Een goede dag gewenst
+      - Een goeie dag gewenst
+      - Nee bedankt en tot ziens
+      - Nee bedankt. Tot ziens
+      - Nee bedankt. Tot ziens.
+      - Nee dankuwel. Tot ziens.
+      - Nee dankjewel. Tot ziens.
+      - Tot later
+
+  actions:
+    - kind: Question
+      id: question_zf2HhP
+      variable: Topic.EndConversation
+      prompt: Wilt u ons gesprek beëindigen?
+      entity: BooleanPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: condition_DGc1Wy
+      conditions:
+        - id: condition_DGc1Wy-item-0
+          condition: =Topic.EndConversation = true
+          actions:
+            - kind: BeginDialog
+              id: dn94DC
+              dialog: copilots_header_mvdv_agent1.topic.EndofConversation
+
+        - id: condition_DGc1Wy-item-1
+          condition: =Topic.EndConversation = false
+          actions:
+            - kind: SendActivity
+              id: sendMessage_LdLhmf
+              activity: Ga uw gang. Ik luister.

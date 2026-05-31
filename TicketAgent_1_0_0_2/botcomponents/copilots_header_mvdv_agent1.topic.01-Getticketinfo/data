@@ -1,0 +1,865 @@
+kind: AdaptiveDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: ticketNumber
+    description: Number provided by the user that represents the unique ID of the ticket
+    shouldPromptUser: false
+    inputSettings:
+      repeatCount: 0
+      defaultValue: =Blank()
+
+modelDescription: This topic is triggered when a user wants to access information about their tickets. Before any order details are shared, the topic guides the user through a secure identity verification process. It collects the user's email address, sends a verification code, and validates the code the user enters. Only after successful authentication does the conversation continue to the order-related topics, ensuring that sensitive information is shared safely and only with the rightful user. This topic should be triggered when the user is not authenticated yet.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent: {}
+  actions:
+    - kind: SendActivity
+      id: sendActivity_N026O7
+      activity: Let us first confirm your identity. To do this we will send you an email with a code. Enter this code here in the chat to confirm your identity.
+
+    - kind: Question
+      id: ZdJDob
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.inputEmail
+      prompt: What is your email address used to create the tickets?
+      entity: EmailPrebuiltEntity
+
+    - kind: Question
+      id: 8m6sh0
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.correctEmail
+      prompt: |-
+        The following email address has been detected: {Topic.inputEmail}
+        Is this correct?
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Ja
+              displayName: Yes
+
+            - id: Nee
+              displayName: No
+
+    - kind: ConditionGroup
+      id: conditionGroup_jAgOiQ
+      conditions:
+        - id: conditionItem_3uQGIW
+          condition: =Topic.correctEmail = 'copilots_header_mvdv_agent1.topic.01-Getticketinfo.main.8m6sh0'.Ja
+          actions:
+            - kind: SetVariable
+              id: setVariable_5YKiM3
+              variable: Topic.userEmail
+              value: =Topic.inputEmail
+
+      elseActions:
+        - kind: Question
+          id: question_lHHZnt
+          interruptionPolicy:
+            allowInterruption: true
+
+          variable: init:Topic.inputEmail
+          prompt: What is the email address used to create the tickets?
+          entity: EmailPrebuiltEntity
+
+        - kind: SetVariable
+          id: setVariable_5QIoUl
+          variable: Topic.userEmail
+          value: =Topic.inputEmail
+
+    - kind: ParseValue
+      id: NVx8Km
+      variable: Topic.confirmationCode
+      valueType: String
+      value: =Concatenate(RandBetween(0,9), RandBetween(0,9), RandBetween(0,9), RandBetween(0,9), RandBetween(0,9), RandBetween(0,9), RandBetween(0,9))
+
+    - kind: SetVariable
+      id: IraXzm
+      variable: Topic.codeTries
+      value: 0
+
+    - kind: ParseValue
+      id: 1e56JC
+      variable: Topic.emailBody
+      valueType: String
+      value: "<!DOCTYPE html> <html lang='nl'> <head>   <meta charset='UTF-8' />   <style>     body { font-family: Arial, Helvetica, sans-serif; color: #333333; line-height: 1.6; font-size: 15px; }     .container { max-width: 600px; }     .code-box { margin: 20px 0; padding: 15px; background-color: #f5f5f5; border-left: 4px solid #2a7ae2; }     .code { font-size: 24px; font-weight: bold; color: #000000; letter-spacing: 2px; }     .footer { margin-top: 30px; font-size: 13px; color: #666666; }   </style> </head> <body>   <div class='container'>     <p>Dear customer,</p>     <p>You have just received a verification code to confirm your identity. Enter the code below in your conversation with our digital agent.</p>     <div class='code-box'>       <div class='code'>{confirmationCode}</div>     </div>     <p>This code is <strong>valid for 1 hour</strong>. If you did not request a verification or have any questions, please feel free to contact us.</p>     <p>Kind regards,<br/><em>Your service team</em></p>     <div class='footer'>This is an automatically generated email. Do not reply to this message.</div>   </div> </body> </html>"
+
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_wf0QZr
+      input:
+        binding:
+          Body: |-
+            =Substitute(
+                Topic.emailBody, "{confirmationCode}", Topic.confirmationCode)
+          Subject: Bevestigingscode Ticket Agent
+          To: =Topic.userEmail
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.SendEmailV2
+
+      connectionReference: copilots_header_mvdv_agent1.shared_office365.shared-office365-6faa917e-232a-4bbe-8cbc-c3cd6aee2a5b
+      connectionProperties:
+        mode: Maker
+
+      operationId: SendEmailV2
+
+    - kind: InvokeConnectorAction
+      id: invokeConnectorAction_shlj4G
+      input:
+        binding:
+          $filter: =$"mvdv_conversationtrackingid eq '{System.Conversation.Id}'"
+          $orderby: mvdv_lastrequestcode desc
+          entityName: mvdv_conversationtrackings
+          organization: current
+
+      output:
+        kind: SingleVariableOutputBinding
+        variable: Topic.ListRecordsWithOrganization
+
+      connectionReference: copilots_header_mvdv_agent1.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77
+      connectionProperties:
+        name: copilots_header_mvdv_agent1.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77
+        mode: Maker
+
+      dynamicOutputSchema:
+        kind: Record
+        properties:
+          "@odata.nextLink":
+            displayName: Next link
+            description: The url to fetch next page data.
+            visibility: Advanced
+            order: 1
+            type: String
+
+          value:
+            order: 0
+            type:
+              kind: Table
+              properties:
+                _createdby_value:
+                  displayName: Created By (Value)
+                  description: Unique identifier of the user who created the record.
+                  visibility: Advanced
+                  order: 5
+                  type: String
+
+                _createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Created By (Type)
+                  description: Unique identifier of the user who created the record.
+                  visibility: Advanced
+                  order: 4
+                  type: String
+
+                _createdonbehalfby_value:
+                  displayName: Created By (Delegate) (Value)
+                  description: Unique identifier of the delegate user who created the record.
+                  visibility: Advanced
+                  order: 3
+                  type: String
+
+                _createdonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Created By (Delegate) (Type)
+                  description: Unique identifier of the delegate user who created the record.
+                  visibility: Advanced
+                  order: 2
+                  type: String
+
+                _modifiedby_value:
+                  displayName: Modified By (Value)
+                  description: Unique identifier of the user who modified the record.
+                  visibility: Advanced
+                  order: 12
+                  type: String
+
+                _modifiedby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Modified By (Type)
+                  description: Unique identifier of the user who modified the record.
+                  visibility: Advanced
+                  order: 11
+                  type: String
+
+                _modifiedonbehalfby_value:
+                  displayName: Modified By (Delegate) (Value)
+                  description: Unique identifier of the delegate user who modified the record.
+                  visibility: Advanced
+                  order: 10
+                  type: String
+
+                _modifiedonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Modified By (Delegate) (Type)
+                  description: Unique identifier of the delegate user who modified the record.
+                  visibility: Advanced
+                  order: 9
+                  type: String
+
+                _ownerid_value:
+                  displayName: Owner (Value)
+                  description: Owner Id
+                  visibility: Advanced
+                  order: 16
+                  type: String
+
+                _ownerid_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Owner (Type)
+                  description: Owner Id
+                  visibility: Advanced
+                  order: 15
+                  type: String
+
+                _owningbusinessunit_value:
+                  displayName: Owning Business Unit (Value)
+                  description: Unique identifier for the business unit that owns the record
+                  visibility: Advanced
+                  order: 18
+                  type: String
+
+                _owningbusinessunit_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Owning Business Unit (Type)
+                  description: Unique identifier for the business unit that owns the record
+                  visibility: Advanced
+                  order: 17
+                  type: String
+
+                _owningteam_value:
+                  displayName: Owning Team (Value)
+                  description: Unique identifier for the team that owns the record.
+                  visibility: Advanced
+                  order: 20
+                  type: String
+
+                _owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Owning Team (Type)
+                  description: Unique identifier for the team that owns the record.
+                  visibility: Advanced
+                  order: 19
+                  type: String
+
+                _owninguser_value:
+                  displayName: Owning User (Value)
+                  description: Unique identifier for the user that owns the record.
+                  visibility: Advanced
+                  order: 22
+                  type: String
+
+                _owninguser_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                  displayName: Owning User (Type)
+                  description: Unique identifier for the user that owns the record.
+                  visibility: Advanced
+                  order: 21
+                  type: String
+
+                "@odata.id":
+                  displayName: OData Id
+                  description: OData row id
+                  order: 14
+                  type: String
+
+                createdon:
+                  displayName: Created On
+                  description: Date and time when the record was created.
+                  visibility: Advanced
+                  order: 6
+                  type: DateTime
+
+                importsequencenumber:
+                  displayName: Import Sequence Number
+                  description: Sequence number of the import that created this record.
+                  visibility: Advanced
+                  order: 7
+                  type: Number
+
+                modifiedon:
+                  displayName: Modified On
+                  description: Date and time when the record was modified.
+                  visibility: Advanced
+                  order: 13
+                  type: DateTime
+
+                mvdv_conversationid:
+                  displayName: Conversation Id
+                  order: 0
+                  type: String
+
+                mvdv_conversationtrackingid:
+                  displayName: Conversation Tracking
+                  description: Unique identifier for entity instances
+                  visibility: Advanced
+                  order: 1
+                  type: String
+
+                mvdv_lastrequestcode:
+                  displayName: Last request code
+                  visibility: Advanced
+                  order: 8
+                  type: DateTime
+
+                overriddencreatedon:
+                  displayName: Record Created On
+                  description: Date and time that the record was migrated.
+                  visibility: Advanced
+                  order: 23
+                  type: DateTime
+
+                statecode:
+                  displayName: Status
+                  description: Status of the Conversation Tracking
+                  visibility: Advanced
+                  order: 24
+                  dynamicValuesConfig:
+                    capability: List
+
+                  type: Number
+
+                statuscode:
+                  displayName: Status Reason
+                  description: Reason for the status of the Conversation Tracking
+                  visibility: Advanced
+                  order: 25
+                  dynamicValuesConfig:
+                    capability: List
+
+                  type: Number
+
+                timezoneruleversionnumber:
+                  displayName: Time Zone Rule Version Number
+                  description: For internal use only.
+                  visibility: Advanced
+                  order: 26
+                  type: Number
+
+                utcconversiontimezonecode:
+                  displayName: UTC Conversion Time Zone Code
+                  description: Time zone code that was in use when the record was created.
+                  visibility: Advanced
+                  order: 27
+                  type: Number
+
+                versionnumber:
+                  displayName: Version Number
+                  description: Version Number
+                  visibility: Advanced
+                  order: 28
+                  type: Number
+
+      errorHandling:
+        kind: ContinueOnErrorBehavior
+
+      operationId: ListRecordsWithOrganization
+
+    - kind: ParseValue
+      id: ByzRvT
+      variable: Topic.requestAgainVisible
+      valueType: Boolean
+      value: =If(First(Topic.ListRecordsWithOrganization.value).mvdv_lastrequestcode > DateAdd(Now(), -15,TimeUnit.Minutes), false, true)
+
+    - kind: AdaptiveCardPrompt
+      id: uh5sqc
+      interruptionPolicy:
+        allowInterruption: false
+
+      card: |-
+        =
+        {
+          '$schema': "https://adaptivecards.io/schemas/adaptive-card.json",
+          type: "AdaptiveCard",
+          version: "1.5",
+          body: [
+            {
+              type: "TextBlock",
+              text: "Verification code",
+              weight: "Bolder",
+              size: "Large"
+            },
+            {
+              type: "TextBlock",
+              text: "We have sent a code to the following email address:",
+              wrap: true,
+              spacing: "Small"
+            },
+            {
+              type: "FactSet",
+              facts: [
+                {
+                  title: "Email:",
+                  value: Topic.inputEmail
+                },
+                {
+                  title: "Sent on:",
+                  value: Now()
+                }
+              ],
+              spacing: "Small"
+            },
+            {
+              type: "TextBlock",
+              text: "Enter your code below.",
+              wrap: true,
+              spacing: "Medium"
+            },
+            {
+              type: "Input.Text",
+              id: "code",
+              label: "Verification code",
+              placeholder: "E.g. 123456",
+              maxLength: 12,
+              isRequired: true,
+              errorMessage: "Please enter your verification code."
+            },
+            {
+              type: "TextBlock",
+              text: "Note: the code is valid for 1 hour.",
+              wrap: true,
+              spacing: "Small",
+              isSubtle: true
+            }
+          ],
+          actions: [
+            {
+              type: "Action.Submit",
+              title: "Submit",
+              associatedInputs: "auto",
+              data: {
+                action: "submitCode"
+              }
+            },
+            {
+              type: "Action.Submit",
+              title: "No code received",
+              associatedInputs: "none",
+              data: {
+                action: "newCode"
+              },
+              isEnabled: Topic.requestAgainVisible
+            }
+          ]
+        }
+      output:
+        binding:
+          action: Topic.action
+          actionSubmitId: Topic.actionSubmitId
+          code: Topic.code
+
+      outputType:
+        properties:
+          action: String
+          actionSubmitId: String
+          code: String
+
+    - kind: ConditionGroup
+      id: conditionGroup_oldpeE
+      conditions:
+        - id: conditionItem_KguLC9
+          condition: =Topic.action = "submitCode" && Topic.code = Topic.confirmationCode
+          actions:
+            - kind: SetMultipleVariables
+              id: setVariable_dWrrw9
+              assignments:
+                - variable: Global.userEmailConfirmed
+                  value: =Topic.userEmail
+
+                - variable: Global.isAuthenticated
+                  value: =true
+
+                - variable: Global.ticketId
+                  value: =Topic.ticketNumber
+
+            - kind: EndDialog
+              id: yLo2HD
+
+        - id: conditionItem_Fr1vqn
+          condition: =Topic.action = "submitCode" && Topic.code <> Topic.confirmationCode
+          actions:
+            - kind: SetVariable
+              id: setVariable_YnVw8S
+              variable: Topic.codeTries
+              value: =Topic.codeTries + 1
+
+            - kind: ConditionGroup
+              id: conditionGroup_bFPQIb
+              conditions:
+                - id: conditionItem_fDlcZU
+                  condition: =Topic.codeTries < 3
+                  actions:
+                    - kind: SendActivity
+                      id: Eq0mwh
+                      activity: The code you entered does not match the code we sent. Please try again!
+
+                    - kind: GotoAction
+                      id: rkHby5
+                      actionId: uh5sqc
+
+              elseActions:
+                - kind: SendActivity
+                  id: sendActivity_pR3p6Z
+                  activity: The sent code has been entered incorrectly 3 times. This code has been deactivated. You must now wait 5 minutes. After this a new code will automatically be sent to your email.
+
+                - kind: InvokeFlowAction
+                  id: invokeFlowAction_XArMQG
+                  latencyMessageSettings:
+                    allowLatencyMessage: true
+                    latencyMessage: Still {DateDiff(Now(),DateAdd(Now(), 5,TimeUnit.Minutes),TimeUnit.Minutes)} minutes to wait. Keep an eye on your mailbox. After this time you will automatically receive a new code!
+
+                  input: {}
+                  output: {}
+                  flowId: 74f336a3-8baa-a692-7e4b-f64d8c34d05b
+
+                - kind: GotoAction
+                  id: rKgm76
+                  actionId: NVx8Km
+
+        - id: conditionItem_LhM2aL
+          condition: =Topic.action = "newCode"
+          actions:
+            - kind: InvokeConnectorAction
+              id: invokeConnectorAction_9UcwzQ
+              input:
+                binding:
+                  entityName: mvdv_conversationtrackings
+                  item: "={mvdv_lastrequestcode: Now()}"
+                  organization: current
+                  recordId: =System.Conversation.Id
+
+              output:
+                kind: SingleVariableOutputBinding
+                variable: Topic.UpdateRecordWithOrganization
+
+              connectionReference: copilots_header_mvdv_agent1.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77
+              connectionProperties:
+                name: copilots_header_mvdv_agent1.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77
+                mode: Maker
+
+              dynamicInputSchema:
+                properties:
+                  entityName:
+                    displayName: Table name
+                    description: Choose a table
+                    isRequired: true
+                    order: 1
+                    dynamicValuesConfig:
+                      capability: List
+
+                    type: String
+
+                  item:
+                    displayName: Row Item
+                    description: Row to update
+                    isRequired: true
+                    order: 3
+                    type:
+                      kind: Record
+                      properties:
+                        mvdv_conversationid:
+                          displayName: Conversation Id
+                          order: 0
+                          type: String
+
+                        mvdv_lastrequestcode:
+                          displayName: Last request code
+                          visibility: Advanced
+                          order: 1
+                          type: DateTime
+
+                        ownerid@odata.bind:
+                          displayName: Owner (Owners)
+                          description: Owner Id
+                          visibility: Advanced
+                          order: 2
+                          type: String
+
+                        statecode:
+                          displayName: Status
+                          description: Status of the Conversation Tracking
+                          visibility: Advanced
+                          order: 3
+                          dynamicValuesConfig:
+                            capability: List
+
+                          type: Number
+
+                        statuscode:
+                          displayName: Status Reason
+                          description: Reason for the status of the Conversation Tracking
+                          visibility: Advanced
+                          order: 4
+                          dynamicValuesConfig:
+                            capability: List
+
+                          type: Number
+
+                        timezoneruleversionnumber:
+                          displayName: Time Zone Rule Version Number
+                          description: For internal use only.
+                          visibility: Advanced
+                          order: 5
+                          type: Number
+
+                        utcconversiontimezonecode:
+                          displayName: UTC Conversion Time Zone Code
+                          description: Time zone code that was in use when the record was created.
+                          visibility: Advanced
+                          order: 6
+                          type: Number
+
+                  organization:
+                    displayName: Environment
+                    description: Choose an environment
+                    isRequired: true
+                    order: 0
+                    dynamicValuesConfig:
+                      capability: List
+
+                    type: String
+
+                  recordId:
+                    displayName: Row ID
+                    description: Enter the row's globally unique identifier (GUID)
+                    isRequired: true
+                    order: 2
+                    type: String
+
+                  x-ms-odata-metadata-full:
+                    displayName: Return Full Metadata
+                    description: The header parameter to customer to opt-in returning full odata metadata in response.
+                    visibility: Advanced
+                    order: 4
+                    type: Boolean
+
+              dynamicOutputSchema:
+                kind: Record
+                properties:
+                  _createdby_value:
+                    displayName: Created By (Value)
+                    description: Unique identifier of the user who created the record.
+                    visibility: Advanced
+                    order: 5
+                    type: String
+
+                  _createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Created By (Type)
+                    description: Unique identifier of the user who created the record.
+                    visibility: Advanced
+                    order: 4
+                    type: String
+
+                  _createdonbehalfby_value:
+                    displayName: Created By (Delegate) (Value)
+                    description: Unique identifier of the delegate user who created the record.
+                    visibility: Advanced
+                    order: 3
+                    type: String
+
+                  _createdonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Created By (Delegate) (Type)
+                    description: Unique identifier of the delegate user who created the record.
+                    visibility: Advanced
+                    order: 2
+                    type: String
+
+                  _modifiedby_value:
+                    displayName: Modified By (Value)
+                    description: Unique identifier of the user who modified the record.
+                    visibility: Advanced
+                    order: 12
+                    type: String
+
+                  _modifiedby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Modified By (Type)
+                    description: Unique identifier of the user who modified the record.
+                    visibility: Advanced
+                    order: 11
+                    type: String
+
+                  _modifiedonbehalfby_value:
+                    displayName: Modified By (Delegate) (Value)
+                    description: Unique identifier of the delegate user who modified the record.
+                    visibility: Advanced
+                    order: 10
+                    type: String
+
+                  _modifiedonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Modified By (Delegate) (Type)
+                    description: Unique identifier of the delegate user who modified the record.
+                    visibility: Advanced
+                    order: 9
+                    type: String
+
+                  _ownerid_value:
+                    displayName: Owner (Value)
+                    description: Owner Id
+                    visibility: Advanced
+                    order: 16
+                    type: String
+
+                  _ownerid_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Owner (Type)
+                    description: Owner Id
+                    visibility: Advanced
+                    order: 15
+                    type: String
+
+                  _owningbusinessunit_value:
+                    displayName: Owning Business Unit (Value)
+                    description: Unique identifier for the business unit that owns the record
+                    visibility: Advanced
+                    order: 18
+                    type: String
+
+                  _owningbusinessunit_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Owning Business Unit (Type)
+                    description: Unique identifier for the business unit that owns the record
+                    visibility: Advanced
+                    order: 17
+                    type: String
+
+                  _owningteam_value:
+                    displayName: Owning Team (Value)
+                    description: Unique identifier for the team that owns the record.
+                    visibility: Advanced
+                    order: 20
+                    type: String
+
+                  _owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Owning Team (Type)
+                    description: Unique identifier for the team that owns the record.
+                    visibility: Advanced
+                    order: 19
+                    type: String
+
+                  _owninguser_value:
+                    displayName: Owning User (Value)
+                    description: Unique identifier for the user that owns the record.
+                    visibility: Advanced
+                    order: 22
+                    type: String
+
+                  _owninguser_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+                    displayName: Owning User (Type)
+                    description: Unique identifier for the user that owns the record.
+                    visibility: Advanced
+                    order: 21
+                    type: String
+
+                  "@odata.id":
+                    displayName: OData Id
+                    description: OData row id
+                    order: 14
+                    type: String
+
+                  createdon:
+                    displayName: Created On
+                    description: Date and time when the record was created.
+                    visibility: Advanced
+                    order: 6
+                    type: DateTime
+
+                  importsequencenumber:
+                    displayName: Import Sequence Number
+                    description: Sequence number of the import that created this record.
+                    visibility: Advanced
+                    order: 7
+                    type: Number
+
+                  modifiedon:
+                    displayName: Modified On
+                    description: Date and time when the record was modified.
+                    visibility: Advanced
+                    order: 13
+                    type: DateTime
+
+                  mvdv_conversationid:
+                    displayName: Conversation Id
+                    order: 0
+                    type: String
+
+                  mvdv_conversationtrackingid:
+                    displayName: Conversation Tracking
+                    description: Unique identifier for entity instances
+                    visibility: Advanced
+                    order: 1
+                    type: String
+
+                  mvdv_lastrequestcode:
+                    displayName: Last request code
+                    visibility: Advanced
+                    order: 8
+                    type: DateTime
+
+                  overriddencreatedon:
+                    displayName: Record Created On
+                    description: Date and time that the record was migrated.
+                    visibility: Advanced
+                    order: 23
+                    type: DateTime
+
+                  statecode:
+                    displayName: Status
+                    description: Status of the Conversation Tracking
+                    visibility: Advanced
+                    order: 24
+                    dynamicValuesConfig:
+                      capability: List
+
+                    type: Number
+
+                  statuscode:
+                    displayName: Status Reason
+                    description: Reason for the status of the Conversation Tracking
+                    visibility: Advanced
+                    order: 25
+                    dynamicValuesConfig:
+                      capability: List
+
+                    type: Number
+
+                  timezoneruleversionnumber:
+                    displayName: Time Zone Rule Version Number
+                    description: For internal use only.
+                    visibility: Advanced
+                    order: 26
+                    type: Number
+
+                  utcconversiontimezonecode:
+                    displayName: UTC Conversion Time Zone Code
+                    description: Time zone code that was in use when the record was created.
+                    visibility: Advanced
+                    order: 27
+                    type: Number
+
+                  versionnumber:
+                    displayName: Version Number
+                    description: Version Number
+                    visibility: Advanced
+                    order: 28
+                    type: Number
+
+              operationId: UpdateRecordWithOrganization
+
+            - kind: GotoAction
+              id: PKEhLC
+              actionId: NVx8Km
+
+    - kind: EndDialog
+      id: vqMRON
+
+inputType:
+  properties:
+    ticketNumber:
+      displayName: ticketNumber
+      description: Number provided by the user that represents the unique ID of the ticket
+      type: Number
+
+outputType:
+  properties:
+    authenticated:
+      displayName: authenticated
+      description: This should indicate the user is authenticated
+      type:
+        kind: String
+        sensitivityLevel: None

@@ -1,0 +1,5 @@
+<botcomponent_msdyn_aimodelset>
+  <botcomponent_msdyn_aimodel botcomponentid.schemaname="copilots_header_mvdv_agent1.topic.02-Getticketinfo" msdyn_aimodelid.msdyn_aimodelid="800d4664-385f-4649-a9bc-c48d3559b443">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_msdyn_aimodel>
+</botcomponent_msdyn_aimodelset>

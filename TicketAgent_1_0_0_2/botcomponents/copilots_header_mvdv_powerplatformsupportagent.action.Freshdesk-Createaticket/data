@@ -1,0 +1,61 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: subject
+    description: The subject for the ticket. This should be the name of the error and the name of the Power Automate flow! The whole response has to be in English!
+
+  - kind: AutomaticTaskInput
+    propertyName: description
+    description: The description for the ticket. The description should be the output of the Learn MCP Server response. It should also be formatted with blank spaces. The whole response has to be in English!
+
+  - kind: ManualTaskInput
+    propertyName: email
+    value: =System.User.Email
+
+  - kind: AutomaticTaskInput
+    propertyName: status
+
+modelDisplayName: Create a ticket
+modelDescription: Create a ticket. Text MUST be in ENGLISH
+outputs:
+  - propertyName: created_at
+
+  - propertyName: deleted
+
+  - propertyName: description
+
+  - propertyName: description_text
+
+  - propertyName: due_by
+
+  - propertyName: id
+
+  - propertyName: is_escalated
+
+  - propertyName: priority
+
+  - propertyName: requester_id
+
+  - propertyName: responder_id
+
+  - propertyName: source
+
+  - propertyName: spam
+
+  - propertyName: status
+
+  - propertyName: subject
+
+  - propertyName: type
+
+  - propertyName: updated_at
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: copilots_header_mvdv_powerplatformsupportagent.shared_freshdesk.f227998aa1e04280b5acf11c0fd13082
+  connectionProperties:
+    mode: Invoker
+
+  operationId: CreateTicket
+
+outputMode: All

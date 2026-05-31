@@ -1,0 +1,50 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: ticketId
+    description: The ticket Id. Dit is het ID dat te vinden is in de Support Request tabel in de kolom Ticket ID.
+
+modelDisplayName: Get ticket
+modelDescription: Get a ticket by Id.
+outputs:
+  - propertyName: created_at
+
+  - propertyName: deleted
+
+  - propertyName: description
+
+  - propertyName: description_text
+
+  - propertyName: due_by
+
+  - propertyName: id
+
+  - propertyName: is_escalated
+
+  - propertyName: priority
+
+  - propertyName: requester_id
+
+  - propertyName: responder_id
+
+  - propertyName: source
+
+  - propertyName: spam
+
+  - propertyName: status
+
+  - propertyName: subject
+
+  - propertyName: type
+
+  - propertyName: updated_at
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: copilots_header_mvdv_agent1.shared_freshdesk.f227998aa1e04280b5acf11c0fd13082
+  connectionProperties:
+    mode: Invoker
+
+  operationId: GetTicket
+
+outputMode: All

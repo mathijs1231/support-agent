@@ -1,0 +1,9 @@
+kind: ExternalTriggerConfiguration
+externalTriggerSource:
+  kind: WorkflowExternalTrigger
+  flowId: aa4529b7-5a06-f111-8406-0022489bfca4
+
+extensionData:
+  flowName: 60026cf4-f521-63c3-d1c4-ccf9d837aaad
+  flowUrl: /providers/Microsoft.ProcessSimple/environments/7f119d0b-dfc5-e1fb-966a-491b49cb4351/flows/60026cf4-f521-63c3-d1c4-ccf9d837aaad
+  triggerConnectionType: Microsoft Dataverse

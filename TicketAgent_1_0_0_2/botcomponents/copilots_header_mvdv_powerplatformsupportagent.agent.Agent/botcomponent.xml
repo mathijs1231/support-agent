@@ -1,0 +1,10 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.agent.Agent">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Policy &amp; Support Assistant</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

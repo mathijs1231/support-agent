@@ -1,0 +1,10 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.topic.03-GetKnowledge">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Application Insights Telemetry</name>
+  <parentbotcomponentcollectionid>
+    <schemaname>bot_componentcollection_a_s_r_application_insights</schemaname>
+  </parentbotcomponentcollectionid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

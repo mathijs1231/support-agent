@@ -1,0 +1,15 @@
+kind: TaskDialog
+modelDisplayName: Microsoft Learn Docs MCP Server
+modelDescription: MCP Server to search Microsoft Learn content
+action:
+  kind: InvokeExternalAgentTaskAction
+  connectionReference: copilots_header_mvdv_powerplatformsupportagent.shared_microsoftlearndocsmcpserver.ff46762685a44b7e8fce395af42d8341
+  connectionProperties:
+    usageDescription: This tool is used to analyze the error that has been recieved by the agent. It should use the mvdv_errorpayload message to analyze the error and rootcause. It also should use clientdata to analyze the flow and what should be fixed! The whole response has to be in English!
+    mode: Invoker
+
+  operationDetails:
+    kind: ModelContextProtocolMetadata
+    operationId: microsoft_docs_search
+    tools:
+      kind: UseAllTools

@@ -1,0 +1,40 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnGeneratedResponse
+  id: main
+  actions:
+    - kind: Foreach
+      id: foreach_NPqLju
+      displayName: Loop through a list
+      items: =System.Response.Citations
+      value: init:Topic.Citation
+      index: init:Topic.LoopIndex1
+      actions:
+        - kind: LogCustomTelemetryEvent
+          id: BzDgZ6
+          displayName: Log custom telemetry KnowledgeUsed
+          eventName: KnowledgeUsed
+          properties: |-
+            =        {
+                        Name: Topic.Citation.Name,
+                        TextUsed: Topic.Citation.Text,
+                        URL: Topic.Citation.Url,
+                        OriginalQuestion: System.LastMessage.Text, 
+                        UsedRewrittenQuery: System.Response.RewrittenQuery
+                    }
+
+    - kind: LogCustomTelemetryEvent
+      id: 71fORI
+      displayName: Log custom telemetry ExecutedPlan
+      eventName: ExecutedPlan
+      properties: |-
+        =        {
+                    PlanSteps: System.Response.PlanSteps
+                }
+         
+
+    - kind: EndDialog
+      id: bt9Ek1
+
+inputType: {}
+outputType: {}

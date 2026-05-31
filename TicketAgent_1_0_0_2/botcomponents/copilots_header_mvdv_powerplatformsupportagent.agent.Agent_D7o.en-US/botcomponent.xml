@@ -1,0 +1,14 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.agent.Agent_D7o.en-US">
+  <componenttype>10</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <language>1033</language>
+  <name>Microsoft Error Resolution Agent (en-US)</name>
+  <parentbotcomponentid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent.agent.Agent_D7o</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

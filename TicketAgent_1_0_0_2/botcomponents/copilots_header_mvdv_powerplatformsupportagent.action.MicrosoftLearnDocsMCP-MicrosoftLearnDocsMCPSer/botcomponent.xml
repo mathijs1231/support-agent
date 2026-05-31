@@ -1,0 +1,10 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.action.MicrosoftLearnDocsMCP-MicrosoftLearnDocsMCPSer">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Microsoft Learn Docs MCP - Microsoft Learn Docs MCP Server</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>1</statecode>
+  <statuscode>2</statuscode>
+</botcomponent>

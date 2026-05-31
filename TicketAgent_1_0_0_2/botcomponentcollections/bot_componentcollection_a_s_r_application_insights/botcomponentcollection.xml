@@ -1,0 +1,7 @@
+<botcomponentcollection schemaname="bot_componentcollection_a_s_r_application_insights">
+  <description>Deze component collection bevat tools om Custom Telemetrie te sturen naar Application Insights</description>
+  <iscustomizable>1</iscustomizable>
+  <name>a.s.r. Application Insights</name>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponentcollection>

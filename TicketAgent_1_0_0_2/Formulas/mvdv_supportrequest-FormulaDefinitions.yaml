@@ -1,0 +1,2 @@
+cr49d_isolderthen14days: |
+    =createdon < DateAdd( Now(), -336, TimeUnit.Hours )

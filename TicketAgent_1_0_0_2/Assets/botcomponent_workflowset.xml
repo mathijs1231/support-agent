@@ -1,0 +1,17 @@
+<botcomponent_workflowset>
+  <botcomponent_workflow botcomponentid.schemaname="copilots_header_mvdv_agent1.action.Untitled" workflowid.workflowid="74f336a3-8baa-a692-7e4b-f64d8c34d05b">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="copilots_header_mvdv_agent1.topic.01-Getticketinfo" workflowid.workflowid="74f336a3-8baa-a692-7e4b-f64d8c34d05b">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.action.AIApprovalFlow2.0" workflowid.workflowid="dfb4fbbf-8452-f111-bec6-7ced8d76b3cc">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.ExternalTriggerCo.6cfea059-2c39-4961-9c90-50d75eca4c3" workflowid.workflowid="aa4529b7-5a06-f111-8406-0022489bfca4">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+  <botcomponent_workflow botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.ExternalTriggerCo.782c971e-89ab-4540-a2f3-157be048554" workflowid.workflowid="2b6d16f3-3404-f111-8406-0022489ab115">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_workflow>
+</botcomponent_workflowset>

@@ -1,0 +1,11 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.topic.ConversationStart">
+  <componenttype>9</componenttype>
+  <description>Dit systeemonderwerp wordt geactiveerd wanneer de agent een activiteit ontvangt die het begin van een nieuw gesprek aangeeft. Als u niet wilt dat de agent het gesprek initieert, schakelt u dit onderwerp uit.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Begin van gesprek</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

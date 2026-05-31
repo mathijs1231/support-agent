@@ -1,0 +1,6 @@
+kind: KnowledgeSourceConfiguration
+source:
+  kind: SharePointSearchSource
+  triggerCondition: true
+  site: https://rubiconict.sharepoint.com/sites/Copilot/Shared%20Documents/Freshworks-Analytics-User-Guide.pdf
+  additionalSearchTerms:

@@ -1,0 +1,34 @@
+kind: AdaptiveDialog
+modelDescription: This topic provides information about the tickets that have been created for the users.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  actions:
+    - kind: Question
+      id: question_2UyG6Y
+      prompt: Are you looking for a specific ticket based on a ticket ID, or would you like an overview of the open tickets?
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Specifiek ticket
+              displayName: Specific ticket
+
+            - id: Overzicht van tickets
+              displayName: Overview of tickets
+
+    - kind: ConditionGroup
+      id: conditionGroup_t594is
+      conditions:
+        - id: conditionItem_0Nkh6Z
+          actions:
+            - kind: Question
+              id: question_1H1vpy
+              prompt: Select a ticket you would like to know more about!
+
+        - id: conditionItem_cosUvQ
+          actions:
+            - kind: Question
+              id: question_AThN4U
+              prompt: Which ticket are you referring to in this case?

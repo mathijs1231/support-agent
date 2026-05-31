@@ -1,0 +1,11 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.topic.Greeting">
+  <componenttype>9</componenttype>
+  <description>Dit onderwerp wordt geactiveerd wanneer de gebruiker de agent begroet.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Begroeting</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

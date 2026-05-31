@@ -1,0 +1,513 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_sharepointonline-1": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedsharepointonline_4c9bc"
+        },
+        "runtimeSource": "invoker"
+      },
+      "shared_commondataserviceforapps-1": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedcommondataserviceforapps_c58d5"
+        },
+        "runtimeSource": "embedded"
+      },
+      "shared_powerplatformforadmins-1": {
+        "api": {
+          "name": "shared_powerplatformforadmins"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedpowerplatformforadmins_4dbc6"
+        },
+        "runtimeSource": "invoker"
+      },
+      "shared_advancedapprovals": {
+        "api": {
+          "name": "shared_advancedapprovals"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedadvancedapprovals_c7107"
+        },
+        "runtimeSource": "invoker"
+      },
+      "shared_webcontents": {
+        "api": {
+          "name": "shared_webcontents"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "new_sharedwebcontents_250cd"
+        },
+        "runtimeSource": "invoker"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        }
+      },
+      "triggers": {
+        "manual": {
+          "type": "Request",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "description": "",
+                  "title": "Flow Id",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_1": {
+                  "description": "Please enter your input",
+                  "title": "Environment ID",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_2": {
+                  "description": "Please enter your input",
+                  "title": "Platform",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                },
+                "text_3": {
+                  "description": "Please enter your input",
+                  "title": "Support Request ID",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "required": [
+                "text",
+                "text_1",
+                "text_2"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "b8f61c18-7224-4f8a-9c5f-72fbce5df764",
+            "flowSystemMetadata": {
+              "flowKind": "Stateful"
+            }
+          }
+        }
+      },
+      "actions": {
+        "Respond_to_the_agent": {
+          "type": "Response",
+          "kind": "Skills",
+          "inputs": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "outcome": {
+                  "title": "Outcome",
+                  "description": "Dit is de uitkomst van de approval die is uitgevoerd. Deze bepaald wat de agent in het vervolg moet doen.",
+                  "type": "string",
+                  "x-ms-content-hint": "TEXT",
+                  "x-ms-dynamically-added": true
+                }
+              },
+              "additionalProperties": {}
+            },
+            "statusCode": 200,
+            "body": {
+              "outcome": "@{body('Run_a_multistage_approval_(preview)')}"
+            }
+          },
+          "runAfter": {
+            "Run_a_multistage_approval_(preview)": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "81c94f73-dd52-465c-ad3b-a4686da63cc3"
+          }
+        },
+        "Get_file_content": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "dataset": "https://rubiconict.sharepoint.com/sites/Copilot",
+              "id": "%252fShared%2bDocuments%252fRubicon_Freshdesk_Beleid_ISO.pdf",
+              "inferContentType": true
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "operationId": "GetFileContent",
+              "connectionName": "shared_sharepointonline-1"
+            }
+          },
+          "runAfter": {
+            "Scope_1": [
+              "Succeeded",
+              "Failed"
+            ]
+          },
+          "metadata": {
+            "%252fShared%2bDocuments%252fRubicon_Freshdesk_Beleid_ISO.pdf": "/Shared Documents/Rubicon_Freshdesk_Beleid_ISO.pdf"
+          }
+        },
+        "Scope": {
+          "type": "Scope",
+          "actions": {
+            "List_rows": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "solutioncomponents",
+                  "$filter": "_solutionid_value eq @{outputs('List_rows_-_Get_Active_Solution')?['body/value'][0]['solutionid']} "
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Get_a_row_by_ID_-_Get_Solution": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "List_rows_1": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "solutioncomponents",
+                  "$filter": "_solutionid_value eq @{outputs('Get_a_row_by_ID_-_Get_Solution')?['body/solutionid']} "
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "List_rows": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Get_a_row_by_ID_-_Get_Solution": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "solutions",
+                  "recordId": "@outputs('List_rows_-_Get_Flow')?['body/value'][0]?['solutionid']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItem",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "List_rows_-_Get_Active_Solution": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "List_rows_-_Get_Active_Solution": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "solutions",
+                  "$filter": "friendlyname eq 'Active Solution'"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "List_rows_-_Get_Flow": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "List_rows_-_Get_Flow": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "workflows",
+                  "$select": "solutionid",
+                  "$filter": "workflowid eq @{triggerBody()?['text']}",
+                  "$top": 1
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              }
+            },
+            "Compose": {
+              "type": "Compose",
+              "inputs": "@intersection(outputs('List_rows')?['body/value'], outputs('List_rows_1')?['body/value'])",
+              "runAfter": {
+                "List_rows_1": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Respond_to_the_agent": [
+              "TimedOut"
+            ]
+          }
+        },
+        "List_Environments_as_Admin": {
+          "type": "OpenApiConnection",
+          "inputs": {
+            "parameters": {
+              "api-version": "2018-10-01"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_powerplatformforadmins",
+              "operationId": "Get-AdminEnvironment",
+              "connectionName": "shared_powerplatformforadmins-1"
+            }
+          },
+          "runAfter": {}
+        },
+        "Filter_array_-_Get_environment_": {
+          "type": "Query",
+          "inputs": {
+            "from": "@outputs('List_Environments_as_Admin')?['body/value']",
+            "where": "@equals(item()?['name'],triggerBody()?['text_1'])"
+          },
+          "runAfter": {
+            "List_Environments_as_Admin": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Compose_-_Environment_URL": {
+          "type": "Compose",
+          "inputs": "@outputs('Filter_array_-_Get_environment_')['body'][0]['properties']['linkedEnvironmentMetadata']['instanceUrl']",
+          "runAfter": {
+            "Filter_array_-_Get_environment_": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Run_a_multistage_approval_(preview)_1": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "approvalProcessId": "b46f30cb-ec04-f111-8407-7ced8d76b3cc",
+              "WebhookApprovalProcessCreationInput/multistageinput_Platform": "@triggerBody()?['text_2']",
+              "WebhookApprovalProcessCreationInput/multistageinput_Environment": "@body('Filter_array_-_Get_environment_')[0]['properties']['environmentSku']",
+              "WebhookApprovalProcessCreationInput/multistageinput_State": "@if(equals(body('Get_a_row_by_ID_from_selected_environment')['ismanaged'], true), 'Managed', 'Unmanaged')",
+              "WebhookApprovalProcessCreationInput/multistageinput_Guidelines": "@body('Get_file_content')['$content']"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_advancedapprovals",
+              "operationId": "StartAndWaitForAnApprovalProcess",
+              "connectionName": "shared_advancedapprovals"
+            }
+          },
+          "runAfter": {
+            "Get_file_content": [
+              "TimedOut"
+            ]
+          }
+        },
+        "Run_a_multistage_approval_(preview)": {
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "parameters": {
+              "approvalProcessId": "16773506-8b52-f111-bec6-7ced8d76b3cc",
+              "WebhookApprovalProcessCreationInput/multistageinput_Platform": "@triggerBody()?['text_2']",
+              "WebhookApprovalProcessCreationInput/multistageinput_State": "@if(equals(body('Get_a_row_by_ID_from_selected_environment')?['ismanaged'], true), 'Unmanaged', 'Managed')",
+              "WebhookApprovalProcessCreationInput/multistageinput_Guidelines": "@body('Get_file_content')['$content']",
+              "WebhookApprovalProcessCreationInput/multistageinput_Environment": "Production"
+            },
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_advancedapprovals",
+              "operationId": "StartAndWaitForAnApprovalProcess",
+              "connectionName": "shared_advancedapprovals"
+            }
+          },
+          "runAfter": {
+            "Get_file_content": [
+              "Succeeded"
+            ]
+          }
+        },
+        "Scope_1": {
+          "type": "Scope",
+          "actions": {
+            "List_rows_from_selected_environment": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "organization": "@outputs('Compose_-_Environment_URL')",
+                  "entityName": "workflows",
+                  "$filter": "workflowid eq '@{triggerBody()?['text']}'"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecordsWithOrganization",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              }
+            },
+            "Get_a_row_by_ID_from_selected_environment": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "organization": "@outputs('Compose_-_Environment_URL')",
+                  "entityName": "solutions",
+                  "recordId": "@outputs('List_rows_from_selected_environment')?['body/value'][0]?['solutionid']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "GetItemWithOrganization",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "List_rows_from_selected_environment": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "List_rows_from_selected_environment_1": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "organization": "@outputs('Compose_-_Environment_URL')",
+                  "entityName": "solutioncomponents",
+                  "$filter": "(objectid eq @{triggerBody()?['text']})",
+                  "$expand": "solutionid($select=friendlyname,uniquename,version,ismanaged)\n"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "ListRecordsWithOrganization",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Get_a_row_by_ID_from_selected_environment": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Filter_array": {
+              "type": "Query",
+              "inputs": {
+                "from": "@outputs('List_rows_from_selected_environment_1')?['body/value']",
+                "where": "@not(or(\r\n  equals(item()?['solutionid/uniquename'], 'Default'),\r\n  equals(item()?['solutionid/uniquename'], 'Active')\r\n))\r\n"
+              },
+              "runAfter": {
+                "List_rows_from_selected_environment_1": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Upsert_a_row": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "mvdv_supportsolutions",
+                  "recordId": "@outputs('Filter_array')['body'][0]['solutionid']['solutionid']",
+                  "item/mvdv_name": "@outputs('Filter_array')['body'][0]['solutionid']['friendlyname']"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "UpdateRecord",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Filter_array": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Update_a_row": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "entityName": "mvdv_supportrequests",
+                  "recordId": "@triggerBody()?['text_3']",
+                  "item/mvdv_SupportSolution@odata.bind": "/mvdv_supportsolutions(@{outputs('Upsert_a_row')?['body/mvdv_supportsolutionid']})"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "connectionName": "shared_commondataserviceforapps-1"
+                }
+              },
+              "runAfter": {
+                "Upsert_a_row": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Compose_1": {
+              "type": "Compose",
+              "inputs": "https://@{uriHost(outputs('Update_a_row')?['body/@odata.id'])}/api/data/v9.1/CalculateRollupField(Target=@tid,FieldName=@field)?@tid={'@odata.id':'mvdv_supportsolutions(@{outputs('Upsert_a_row')?['body/mvdv_supportsolutionid']})'}&@field='mvdv_amountofrequest'",
+              "runAfter": {
+                "Update_a_row": [
+                  "Succeeded"
+                ]
+              }
+            },
+            "Invoke_an_HTTP_request": {
+              "type": "OpenApiConnection",
+              "inputs": {
+                "parameters": {
+                  "request/method": "GET",
+                  "request/url": "@outputs('Compose_1')"
+                },
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_webcontents",
+                  "operationId": "InvokeHttp",
+                  "connectionName": "shared_webcontents"
+                }
+              },
+              "runAfter": {
+                "Compose_1": [
+                  "Succeeded"
+                ]
+              }
+            }
+          },
+          "runAfter": {
+            "Compose_-_Environment_URL": [
+              "Succeeded"
+            ]
+          }
+        }
+      },
+      "outputs": {}
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

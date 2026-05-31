@@ -1,0 +1,147 @@
+kind: AdaptiveDialog
+modelDescription: This topic is triggered when a user wants to access information about their tickets. Before any order details are shared, the topic guides the user through a secure identity verification process. It collects the user's email address, sends a verification code, and validates the code the user enters. Only after successful authentication does the conversation continue to the order-related topics, ensuring that sensitive information is shared safely and only with the rightful user. This topic should be triggered when the user is not authenticated yet.
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendActivity_y1vd29
+      activity: "AUTH: {Topic.auth}"
+
+    - kind: SendActivity
+      id: sendActivity_N026O7
+      activity: Let us first confirm your identity. To do this we will send you an email with a code. Enter this code here in the chat to confirm your identity.
+
+    - kind: Question
+      id: ZdJDob
+      prompt: What is your email address used to create the tickets?
+
+    - kind: Question
+      id: 8m6sh0
+      prompt: |-
+        The following email address has been detected: {Topic.inputEmail}
+        Is this correct?
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Ja
+              displayName: Yes
+
+            - id: Nee
+              displayName: No
+
+    - kind: ConditionGroup
+      id: conditionGroup_jAgOiQ
+      elseActions:
+        - kind: Question
+          id: question_lHHZnt
+          prompt: What is the email address used to create the tickets?
+
+    - kind: AdaptiveCardPrompt
+      id: uh5sqc
+      card: |-
+        =
+        {
+          '$schema': "https://adaptivecards.io/schemas/adaptive-card.json",
+          type: "AdaptiveCard",
+          version: "1.5",
+          body: [
+            {
+              type: "TextBlock",
+              text: "Verification code",
+              weight: "Bolder",
+              size: "Large"
+            },
+            {
+              type: "TextBlock",
+              text: "We have sent a code to the following email address:",
+              wrap: true,
+              spacing: "Small"
+            },
+            {
+              type: "FactSet",
+              facts: [
+                {
+                  title: "Email:",
+                  value: Topic.inputEmail
+                },
+                {
+                  title: "Sent on:",
+                  value: Now()
+                }
+              ],
+              spacing: "Small"
+            },
+            {
+              type: "TextBlock",
+              text: "Enter your code below.",
+              wrap: true,
+              spacing: "Medium"
+            },
+            {
+              type: "Input.Text",
+              id: "code",
+              label: "Verification code",
+              placeholder: "E.g. 123456",
+              maxLength: 12,
+              isRequired: true,
+              errorMessage: "Please enter your verification code."
+            },
+            {
+              type: "TextBlock",
+              text: "Note: the code is valid for 1 hour.",
+              wrap: true,
+              spacing: "Small",
+              isSubtle: true
+            }
+          ],
+          actions: [
+            {
+              type: "Action.Submit",
+              title: "Submit",
+              associatedInputs: "auto",
+              data: {
+                action: "submitCode"
+              }
+            },
+            {
+              type: "Action.Submit",
+              title: "No code received",
+              associatedInputs: "none",
+              data: {
+                action: "newCode"
+              },
+              isEnabled: Topic.requestAgainVisible
+            }
+          ]
+        }
+
+    - kind: ConditionGroup
+      id: conditionGroup_oldpeE
+      conditions:
+        - id: conditionItem_Fr1vqn
+          actions:
+            - kind: ConditionGroup
+              id: conditionGroup_bFPQIb
+              conditions:
+                - id: conditionItem_fDlcZU
+                  actions:
+                    - kind: SendActivity
+                      id: Eq0mwh
+                      activity: The code you entered does not match the code we sent. Please try again!
+
+              elseActions:
+                - kind: SendActivity
+                  id: sendActivity_pR3p6Z
+                  activity: The sent code has been entered incorrectly 3 times. This code has been deactivated. You must now wait 5 minutes. After this a new code will automatically be sent to your email.
+
+                - kind: InvokeFlowAction
+                  id: invokeFlowAction_XArMQG
+                  latencyMessageSettings:
+                    latencyMessage: Still {DateDiff(Now(),DateAdd(Now(), 5,TimeUnit.Minutes),TimeUnit.Minutes)} minutes to wait. Keep an eye on your mailbox. After this time you will automatically receive a new code!
+
+    - kind: SendActivity
+      id: sendActivity_QvgEHh
+      activity: End

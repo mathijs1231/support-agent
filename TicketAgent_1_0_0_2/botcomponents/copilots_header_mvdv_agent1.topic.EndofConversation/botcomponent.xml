@@ -1,0 +1,12 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.topic.EndofConversation">
+  <componenttype>9</componenttype>
+  <description>Dit systeemonderwerp wordt alleen geactiveerd door een omleidingsactie
+en begeleidt de gebruiker door de beoordeling van diens gesprek met de agent.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Einde van gesprek</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

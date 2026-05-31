@@ -1,0 +1,10 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.action.AIApprovalFlow2.0">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>AI Approval Flow 2.0</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

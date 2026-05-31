@@ -1,0 +1,25 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: Subject
+    description: "Dit moet de titel worden van de email. Als er een ticket is aangemaakt moet hier staan dat er ticket is aangemaakt en voor welke instance. Als de aanvraag is afgekeurd moet er een bericht worden verstuurd dat aangeeft dat er een fout is opgetreden in een oplossing waar hij/zij de eigenaar van is. Maar deze wordt niet ondersteund door de support afdeling. "
+
+  - kind: AutomaticTaskInput
+    propertyName: Body
+    description: De output van deze tool moet altijd een volledige HTML‑e-mail zijn met een aanhef, paragrafen en een nette afsluiting namens het Support Team. Wanneer een supportaanvraag is goedgekeurd, moet de e-mail beginnen met de mededeling dat er een supportticket is aangemaakt voor een van de flows van de gebruiker. Geef daarna uitsluitend een korte samenvatting van het probleem en een feitelijke omschrijving van de oorzaak zoals vastgesteld in het ticket. Er mogen geen oplossingen, aanbevolen stappen of documentatielinks worden genoemd. Sluit af met een link naar het ticket en een afsluitende groet namens het Support Team. Wanneer de aanvraag is afgekeurd, moet worden vermeld dat er een fout is opgetreden in een oplossing waarvan de gebruiker eigenaar is, dat deze buiten de ondersteuningsscope valt en daarom niet door het supportteam wordt behandeld. Voeg alleen een korte toelichting toe, zonder oplossingen of verwijzingen, en sluit de e-mail af namens het Support Team. The whole response has to be in English!
+
+modelDisplayName: Send an email when approved or denied
+modelDescription: This operation sends an email message. Deze tool mag alleen worden gebruikt als de aanvraag is goedgekeurd of afgekeurd. Vergeet niet het Ticket ID mee te sturen met de e-mail.
+outputs:
+  - propertyName: Response
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: copilots_header_mvdv_powerplatformsupportagent.shared_office365.shared-office365-6faa917e-232a-4bbe-8cbc-c3cd6aee2a5b
+  connectionProperties:
+    mode: Maker
+
+  operationId: SendEmailV2
+
+outputMode: All
+triggerCondition: true

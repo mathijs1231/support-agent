@@ -1,0 +1,3 @@
+kind: TaskDialog
+modelDisplayName: Send an email when approved or denied
+modelDescription: This operation sends an email message. This tool may only be used when the request has been approved or rejected. Do not forget to include the Ticket ID in the email.

@@ -1,0 +1,11 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.topic.Goodbye">
+  <componenttype>9</componenttype>
+  <description>Dit onderwerp wordt geactiveerd wanneer de gebruiker Tot ziens zegt. Standaard wordt het gesprek hiermee niet beëindigd. Als u het gesprek wilt beëindigen wanneer de gebruiker Tot ziens zegt, kunt u een actie Einde van gesprek aan dit onderwerp toevoegen of kunt u het omleiden naar het systeemonderwerp Einde van gesprek.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Tot ziens</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

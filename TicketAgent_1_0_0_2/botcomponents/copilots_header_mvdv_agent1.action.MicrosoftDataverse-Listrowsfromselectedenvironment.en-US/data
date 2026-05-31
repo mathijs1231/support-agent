@@ -1,0 +1,3 @@
+kind: TaskDialog
+modelDisplayName: List rows from selected environment
+modelDescription: List rows from a table in a Power Platform environment.

@@ -1,0 +1,3 @@
+kind: TaskDialog
+modelDisplayName: Update a ticket
+modelDescription: Update a ticket (only specified values will be updated).

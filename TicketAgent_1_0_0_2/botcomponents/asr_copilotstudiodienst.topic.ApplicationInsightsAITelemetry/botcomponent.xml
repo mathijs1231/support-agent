@@ -1,0 +1,10 @@
+<botcomponent schemaname="asr_copilotstudiodienst.topic.ApplicationInsightsAITelemetry">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Application Insights AI Telemetry</name>
+  <parentbotcomponentcollectionid>
+    <schemaname>bot_componentcollection_application_insights_telemetrie</schemaname>
+  </parentbotcomponentcollectionid>
+  <statecode>1</statecode>
+  <statuscode>2</statuscode>
+</botcomponent>

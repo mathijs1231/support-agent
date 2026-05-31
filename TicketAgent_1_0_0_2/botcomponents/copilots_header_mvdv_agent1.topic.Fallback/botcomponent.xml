@@ -1,0 +1,11 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.topic.Fallback">
+  <componenttype>9</componenttype>
+  <description>Dit systeemonderwerp wordt geactiveerd wanneer de uiting van de gebruiker niet met bestaande onderwerpen overeenkomt.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Fallback</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

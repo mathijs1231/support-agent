@@ -1,0 +1,602 @@
+kind: TaskDialog
+inputs:
+  - kind: ManualTaskInput
+    propertyName: organization
+    value: current
+
+  - kind: ManualTaskInput
+    propertyName: entityName
+    value: mvdv_supportrequests
+
+  - kind: AutomaticTaskInput
+    propertyName: recordId
+    description: Enter the row's globally unique identifier (GUID). Deze kan worden gevonden in de trigger outputs van de flows. Update de rij die je hebt gevonden. Update alleen de kolom mvdv_ticketnumber met het ticket nummer dat je hebt gekregen als output van de Freshdesk tool.
+
+  - kind: AutomaticTaskInput
+    propertyName: item
+    description: Row to update use mvdv_ticketid for the ticket id
+
+modelDisplayName: Upsert a row in selected environment
+modelDescription: Update or add (upsert) a row in a table in a Power Platform environment. This should be used after the creation of a Freshdesk Ticket
+outputs:
+  - propertyName: _createdby_value
+    name: Created By (Value)
+    description: Unique identifier of the user who created the record.
+
+  - propertyName: _createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Created By (Type)
+    description: Unique identifier of the user who created the record.
+
+  - propertyName: _createdonbehalfby_value
+    name: Created By (Delegate) (Value)
+    description: Unique identifier of the delegate user who created the record.
+
+  - propertyName: _createdonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Created By (Delegate) (Type)
+    description: Unique identifier of the delegate user who created the record.
+
+  - propertyName: _modifiedby_value
+    name: Modified By (Value)
+    description: Unique identifier of the user who modified the record.
+
+  - propertyName: _modifiedby_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Modified By (Type)
+    description: Unique identifier of the user who modified the record.
+
+  - propertyName: _modifiedonbehalfby_value
+    name: Modified By (Delegate) (Value)
+    description: Unique identifier of the delegate user who modified the record.
+
+  - propertyName: _modifiedonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Modified By (Delegate) (Type)
+    description: Unique identifier of the delegate user who modified the record.
+
+  - propertyName: _mvdv_supportsolution_value
+    name: Support Solution (Value)
+
+  - propertyName: _mvdv_supportsolution_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Support Solution (Type)
+
+  - propertyName: _ownerid_value
+    name: Owner (Value)
+    description: Owner Id
+
+  - propertyName: _ownerid_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Owner (Type)
+    description: Owner Id
+
+  - propertyName: _owningbusinessunit_value
+    name: Owning Business Unit (Value)
+    description: Unique identifier for the business unit that owns the record
+
+  - propertyName: _owningbusinessunit_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Owning Business Unit (Type)
+    description: Unique identifier for the business unit that owns the record
+
+  - propertyName: _owningteam_value
+    name: Owning Team (Value)
+    description: Unique identifier for the team that owns the record.
+
+  - propertyName: _owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Owning Team (Type)
+    description: Unique identifier for the team that owns the record.
+
+  - propertyName: _owninguser_value
+    name: Owning User (Value)
+    description: Unique identifier for the user that owns the record.
+
+  - propertyName: _owninguser_value@Microsoft.Dynamics.CRM.lookuplogicalname
+    name: Owning User (Type)
+    description: Unique identifier for the user that owns the record.
+
+  - propertyName: @odata.id
+    name: OData Id
+    description: OData row id
+
+  - propertyName: cr49d_isolderthen14days
+    name: Is older then 14 days
+
+  - propertyName: createdon
+    name: Created On
+    description: Date and time when the record was created.
+
+  - propertyName: importsequencenumber
+    name: Import Sequence Number
+    description: Sequence number of the import that created this record.
+
+  - propertyName: modifiedon
+    name: Modified On
+    description: Date and time when the record was modified.
+
+  - propertyName: mvdv_clientdata
+    name: Clientdata
+
+  - propertyName: mvdv_environmentid
+    name: Environment ID
+
+  - propertyName: mvdv_errormessage
+    name: Error Message
+
+  - propertyName: mvdv_instanceid
+    name: Instance ID
+
+  - propertyName: mvdv_instancename
+    name: Instance Name
+
+  - propertyName: mvdv_owneremail
+    name: Owner Email
+
+  - propertyName: mvdv_ownername
+    name: Owner Name
+
+  - propertyName: mvdv_platform
+    name: Platform
+
+  - propertyName: mvdv_supportrequestid
+    name: Support Request
+    description: Unique identifier for entity instances
+
+  - propertyName: mvdv_ticketid
+    name: Ticket ID
+
+  - propertyName: overriddencreatedon
+    name: Record Created On
+    description: Date and time that the record was migrated.
+
+  - propertyName: ppa_errorpayload
+    name: Error Payload
+
+  - propertyName: statecode
+    name: Status
+    description: Status of the Support Request
+
+  - propertyName: statuscode
+    name: Status Reason
+    description: Reason for the status of the Support Request
+
+  - propertyName: timezoneruleversionnumber
+    name: Time Zone Rule Version Number
+    description: For internal use only.
+
+  - propertyName: utcconversiontimezonecode
+    name: UTC Conversion Time Zone Code
+    description: Time zone code that was in use when the record was created.
+
+  - propertyName: versionnumber
+    name: Version Number
+    description: Version Number
+
+action:
+  kind: InvokeConnectorTaskAction
+  connectionReference: copilots_header_mvdv_powerplatformsupportagent.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77
+  connectionProperties:
+    mode: Invoker
+
+  operationId: UpdateRecordWithOrganization
+  dynamicInputSchema:
+    properties:
+      entityName:
+        displayName: Table name
+        description: Choose a table
+        isRequired: true
+        order: 1
+        dynamicValuesConfig:
+          capability: List
+
+        type: String
+
+      item:
+        displayName: Row Item
+        description: Row to update
+        isRequired: true
+        order: 3
+        type:
+          kind: Record
+          properties:
+            mvdv_clientdata:
+              displayName: Clientdata
+              visibility: Advanced
+              order: 0
+              type: String
+
+            mvdv_environmentid:
+              displayName: Environment ID
+              visibility: Advanced
+              order: 1
+              type: String
+
+            mvdv_errormessage:
+              displayName: Error Message
+              visibility: Advanced
+              order: 2
+              type: String
+
+            mvdv_instanceid:
+              displayName: Instance ID
+              visibility: Advanced
+              order: 4
+              type: String
+
+            mvdv_instancename:
+              displayName: Instance Name
+              visibility: Advanced
+              order: 5
+              type: String
+
+            mvdv_owneremail:
+              displayName: Owner Email
+              visibility: Advanced
+              order: 7
+              type: String
+
+            mvdv_ownername:
+              displayName: Owner Name
+              visibility: Advanced
+              order: 8
+              type: String
+
+            mvdv_platform:
+              displayName: Platform
+              visibility: Advanced
+              order: 9
+              type: String
+
+            mvdv_SupportSolution@odata.bind:
+              displayName: Support Solution (Support Solutions)
+              visibility: Advanced
+              order: 12
+              type: String
+
+            mvdv_ticketid:
+              displayName: Ticket ID
+              visibility: Advanced
+              order: 13
+              type: String
+
+            ownerid@odata.bind:
+              displayName: Owner (Owners)
+              description: Owner Id
+              visibility: Advanced
+              order: 6
+              type: String
+
+            ppa_errorpayload:
+              displayName: Error Payload
+              visibility: Advanced
+              order: 3
+              type: String
+
+            statecode:
+              displayName: Status
+              description: Status of the Support Request
+              visibility: Advanced
+              order: 10
+              dynamicValuesConfig:
+                capability: List
+
+              type: Number
+
+            statuscode:
+              displayName: Status Reason
+              description: Reason for the status of the Support Request
+              visibility: Advanced
+              order: 11
+              dynamicValuesConfig:
+                capability: List
+
+              type: Number
+
+            timezoneruleversionnumber:
+              displayName: Time Zone Rule Version Number
+              description: For internal use only.
+              visibility: Advanced
+              order: 14
+              type: Number
+
+            utcconversiontimezonecode:
+              displayName: UTC Conversion Time Zone Code
+              description: Time zone code that was in use when the record was created.
+              visibility: Advanced
+              order: 15
+              type: Number
+
+      organization:
+        displayName: Environment
+        description: Choose an environment
+        isRequired: true
+        order: 0
+        dynamicValuesConfig:
+          capability: List
+
+        type: String
+
+      recordId:
+        displayName: Row ID
+        description: Enter the row's globally unique identifier (GUID)
+        isRequired: true
+        order: 2
+        type: String
+
+      x-ms-odata-metadata-full:
+        displayName: Return Full Metadata
+        description: The header parameter to customer to opt-in returning full odata metadata in response.
+        visibility: Advanced
+        order: 4
+        type: Boolean
+
+  dynamicOutputSchema:
+    kind: Record
+    properties:
+      _createdby_value:
+        displayName: Created By (Value)
+        description: Unique identifier of the user who created the record.
+        visibility: Advanced
+        order: 4
+        type: String
+
+      _createdby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Created By (Type)
+        description: Unique identifier of the user who created the record.
+        visibility: Advanced
+        order: 3
+        type: String
+
+      _createdonbehalfby_value:
+        displayName: Created By (Delegate) (Value)
+        description: Unique identifier of the delegate user who created the record.
+        visibility: Advanced
+        order: 2
+        type: String
+
+      _createdonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Created By (Delegate) (Type)
+        description: Unique identifier of the delegate user who created the record.
+        visibility: Advanced
+        order: 1
+        type: String
+
+      _modifiedby_value:
+        displayName: Modified By (Value)
+        description: Unique identifier of the user who modified the record.
+        visibility: Advanced
+        order: 16
+        type: String
+
+      _modifiedby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Modified By (Type)
+        description: Unique identifier of the user who modified the record.
+        visibility: Advanced
+        order: 15
+        type: String
+
+      _modifiedonbehalfby_value:
+        displayName: Modified By (Delegate) (Value)
+        description: Unique identifier of the delegate user who modified the record.
+        visibility: Advanced
+        order: 14
+        type: String
+
+      _modifiedonbehalfby_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Modified By (Delegate) (Type)
+        description: Unique identifier of the delegate user who modified the record.
+        visibility: Advanced
+        order: 13
+        type: String
+
+      _mvdv_supportsolution_value:
+        displayName: Support Solution (Value)
+        visibility: Advanced
+        order: 35
+        type: String
+
+      _mvdv_supportsolution_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Support Solution (Type)
+        visibility: Advanced
+        order: 34
+        type: String
+
+      _ownerid_value:
+        displayName: Owner (Value)
+        description: Owner Id
+        visibility: Advanced
+        order: 20
+        type: String
+
+      _ownerid_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Owner (Type)
+        description: Owner Id
+        visibility: Advanced
+        order: 19
+        type: String
+
+      _owningbusinessunit_value:
+        displayName: Owning Business Unit (Value)
+        description: Unique identifier for the business unit that owns the record
+        visibility: Advanced
+        order: 24
+        type: String
+
+      _owningbusinessunit_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Owning Business Unit (Type)
+        description: Unique identifier for the business unit that owns the record
+        visibility: Advanced
+        order: 23
+        type: String
+
+      _owningteam_value:
+        displayName: Owning Team (Value)
+        description: Unique identifier for the team that owns the record.
+        visibility: Advanced
+        order: 26
+        type: String
+
+      _owningteam_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Owning Team (Type)
+        description: Unique identifier for the team that owns the record.
+        visibility: Advanced
+        order: 25
+        type: String
+
+      _owninguser_value:
+        displayName: Owning User (Value)
+        description: Unique identifier for the user that owns the record.
+        visibility: Advanced
+        order: 28
+        type: String
+
+      _owninguser_value@Microsoft.Dynamics.CRM.lookuplogicalname:
+        displayName: Owning User (Type)
+        description: Unique identifier for the user that owns the record.
+        visibility: Advanced
+        order: 27
+        type: String
+
+      "@odata.id":
+        displayName: OData Id
+        description: OData row id
+        order: 18
+        type: String
+
+      cr49d_isolderthen14days:
+        displayName: Is older then 14 days
+        visibility: Advanced
+        order: 12
+        type: Boolean
+
+      createdon:
+        displayName: Created On
+        description: Date and time when the record was created.
+        visibility: Advanced
+        order: 5
+        type: DateTime
+
+      importsequencenumber:
+        displayName: Import Sequence Number
+        description: Sequence number of the import that created this record.
+        visibility: Advanced
+        order: 9
+        type: Number
+
+      modifiedon:
+        displayName: Modified On
+        description: Date and time when the record was modified.
+        visibility: Advanced
+        order: 17
+        type: DateTime
+
+      mvdv_clientdata:
+        displayName: Clientdata
+        visibility: Advanced
+        order: 0
+        type: String
+
+      mvdv_environmentid:
+        displayName: Environment ID
+        visibility: Advanced
+        order: 6
+        type: String
+
+      mvdv_errormessage:
+        displayName: Error Message
+        visibility: Advanced
+        order: 7
+        type: String
+
+      mvdv_instanceid:
+        displayName: Instance ID
+        visibility: Advanced
+        order: 10
+        type: String
+
+      mvdv_instancename:
+        displayName: Instance Name
+        visibility: Advanced
+        order: 11
+        type: String
+
+      mvdv_owneremail:
+        displayName: Owner Email
+        visibility: Advanced
+        order: 21
+        type: String
+
+      mvdv_ownername:
+        displayName: Owner Name
+        visibility: Advanced
+        order: 22
+        type: String
+
+      mvdv_platform:
+        displayName: Platform
+        visibility: Advanced
+        order: 29
+        type: String
+
+      mvdv_supportrequestid:
+        displayName: Support Request
+        description: Unique identifier for entity instances
+        visibility: Advanced
+        order: 33
+        type: String
+
+      mvdv_ticketid:
+        displayName: Ticket ID
+        visibility: Advanced
+        order: 36
+        type: String
+
+      overriddencreatedon:
+        displayName: Record Created On
+        description: Date and time that the record was migrated.
+        visibility: Advanced
+        order: 30
+        type: DateTime
+
+      ppa_errorpayload:
+        displayName: Error Payload
+        visibility: Advanced
+        order: 8
+        type: String
+
+      statecode:
+        displayName: Status
+        description: Status of the Support Request
+        visibility: Advanced
+        order: 31
+        dynamicValuesConfig:
+          capability: List
+
+        type: Number
+
+      statuscode:
+        displayName: Status Reason
+        description: Reason for the status of the Support Request
+        visibility: Advanced
+        order: 32
+        dynamicValuesConfig:
+          capability: List
+
+        type: Number
+
+      timezoneruleversionnumber:
+        displayName: Time Zone Rule Version Number
+        description: For internal use only.
+        visibility: Advanced
+        order: 37
+        type: Number
+
+      utcconversiontimezonecode:
+        displayName: UTC Conversion Time Zone Code
+        description: Time zone code that was in use when the record was created.
+        visibility: Advanced
+        order: 38
+        type: Number
+
+      versionnumber:
+        displayName: Version Number
+        description: Version Number
+        visibility: Advanced
+        order: 39
+        type: Number
+
+outputMode: All

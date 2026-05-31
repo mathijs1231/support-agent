@@ -1,0 +1,11 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.GlobalVariableComponent.isAuthenticated">
+  <componenttype>12</componenttype>
+  <description>This variable indicates if a user authenticated</description>
+  <iscustomizable>0</iscustomizable>
+  <name>isAuthenticated</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

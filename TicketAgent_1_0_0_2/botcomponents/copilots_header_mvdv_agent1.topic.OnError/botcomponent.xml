@@ -1,0 +1,11 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.topic.OnError">
+  <componenttype>9</componenttype>
+  <description>Dit systeemonderwerp wordt geactiveerd wanneer de agent een fout detecteert. Als u het testchatvenster gebruikt, wordt de volledige foutbeschrijving weergegeven.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Bij fout</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

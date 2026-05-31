@@ -1,0 +1,12 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.ExternalTriggerCo.782c971e-89ab-4540-a2f3-157be048554">
+  <componenttype>17</componenttype>
+  <description>Trigger your agent with certain message upon event: When a row is added, modified or deleted.</description>
+  <iconurl>https://conn-afd-prod-endpoint-bmc9bqahasf3grgk.b01.azurefd.net/releases/v1.0.1789/1.0.1789.4619/commondataserviceforapps/icon.png</iconurl>
+  <iscustomizable>0</iscustomizable>
+  <name>When a row is added to Support Request</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

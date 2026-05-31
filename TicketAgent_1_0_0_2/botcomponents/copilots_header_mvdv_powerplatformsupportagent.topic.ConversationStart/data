@@ -1,0 +1,12 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendMessage_M0LuhV
+      activity:
+        text:
+          - Hallo, ik ben {System.Bot.Name}, een virtuele assistent. Wees u ervan bewust dat ik gebruik maak van AI om uw vragen te beantwoorden. Als u een website hebt opgegeven tijdens het maken, stel me dan vragen daarover! Zorg vervolgens dat ik de beschikking krijg over meer kennis door generatieve AI in te stellen.
+        speak:
+          - Bedankt dat u {System.Bot.Name} hebt gebeld. Sommige responsen worden gegenereerd door AI en moeten mogelijk worden gecontroleerd op nauwkeurigheid. Hoe kan ik u vandaag helpen?

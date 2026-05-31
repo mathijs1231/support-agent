@@ -1,0 +1,37 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Opnieuw starten
+    includeInOnSelectIntent: false
+    triggerQueries:
+      - laten we opnieuw beginnen
+      - opnieuw beginnen
+      - begin opnieuw
+      - opnieuw starten
+      - start opnieuw
+      - herstarten
+
+  actions:
+    - kind: Question
+      id: question_zguoVV
+      alwaysPrompt: false
+      variable: init:Topic.Confirm
+      prompt: Weet u zeker dat u het gesprek opnieuw wilt starten?
+      entity: BooleanPrebuiltEntity
+
+    - kind: ConditionGroup
+      id: conditionGroup_lvx2zV
+      conditions:
+        - id: conditionItem_sVQtHa
+          condition: =Topic.Confirm = true
+          actions:
+            - kind: BeginDialog
+              id: 0YKYsy
+              dialog: copilots_header_mvdv_powerplatformsupportagent.topic.ResetConversation
+
+      elseActions:
+        - kind: SendActivity
+          id: sendMessage_lk2CyQ
+          activity: OK, laten we doorgaan.

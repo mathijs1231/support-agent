@@ -1,0 +1,19 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendMessage_M0LuhV
+      activity:
+        text:
+          - |-
+            **Welkom!**
+            Om je te helpen met jouw service‑tickets heb ik een ticketnummer van je nodig.
+            Als je het ticketnummer niet bij de hand hebt, kan ik je ook verder helpen op basis van jouw e‑mailadres.
+            Laat me weten met welk ticket je wilt beginnen.
+        speak:
+          - Bedankt dat u {System.Bot.Name} hebt gebeld. Sommige responsen worden gegenereerd door AI en moeten mogelijk worden gecontroleerd op nauwkeurigheid. Hoe kan ik u vandaag helpen?
+
+    - kind: EndDialog
+      id: Yi0WiZ

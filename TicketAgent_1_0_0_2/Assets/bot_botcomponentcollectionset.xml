@@ -1,0 +1,8 @@
+<bot_botcomponentcollectionset>
+  <bot_botcomponentcollection botcomponentcollectionid.schemaname="bot_componentcollection_a_s_r_application_insights" botid.schemaname="copilots_header_mvdv_agent1">
+    <iscustomizable>1</iscustomizable>
+  </bot_botcomponentcollection>
+  <bot_botcomponentcollection botcomponentcollectionid.schemaname="bot_componentcollection_application_insights_telemetrie" botid.schemaname="copilots_header_mvdv_powerplatformsupportagent">
+    <iscustomizable>1</iscustomizable>
+  </bot_botcomponentcollection>
+</bot_botcomponentcollectionset>

@@ -1,0 +1,14 @@
+<botcomponent schemaname="copilots_header_mvdv_agent1.action.MicrosoftDataverse-Listrowsfromselectedenvironment.en-US">
+  <componenttype>10</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <language>1033</language>
+  <name>Microsoft Dataverse - List rows from selected environment (en-US)</name>
+  <parentbotcomponentid>
+    <schemaname>copilots_header_mvdv_agent1.action.MicrosoftDataverse-Listrowsfromselectedenvironment</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_agent1</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

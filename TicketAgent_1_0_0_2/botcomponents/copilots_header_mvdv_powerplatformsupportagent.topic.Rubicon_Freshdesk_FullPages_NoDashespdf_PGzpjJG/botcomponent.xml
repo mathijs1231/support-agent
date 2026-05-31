@@ -1,0 +1,14 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.topic.Rubicon_Freshdesk_FullPages_NoDashespdf_PGzpjJG">
+  <componenttype>16</componenttype>
+  <description>This knowledge source provides information found in Rubicon_Freshdesk_FullPages_NoDashes.pdf SharePoint. This broadly describes the policy regarding Power Platform Support.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Rubicon_Freshdesk_FullPages_NoDashes.pdf</name>
+  <parentbotcomponentid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent.agent.Agent</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

@@ -1,0 +1,14 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.topic.FreshworksAnalyticsUserGuidepdf_ru83s0PD8KNwCDx">
+  <componenttype>16</componenttype>
+  <description>In this knowledge source the agent can find all answers related to Freshdesk, like creating a dashoard, ticket, suppor request etc..</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Freshworks-Analytics-User-Guide.pdf</name>
+  <parentbotcomponentid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent.agent.Agent</schemaname>
+  </parentbotcomponentid>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

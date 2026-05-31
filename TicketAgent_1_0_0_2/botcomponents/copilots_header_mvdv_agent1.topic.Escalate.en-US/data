@@ -1,0 +1,92 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnEscalate
+  id: main
+  intent:
+    displayName: Escalate
+    triggerQueries:
+      - Talk to agent
+      - Talking to agent
+      - Talk to a person
+      - Talking to a person
+      - Talk to someone
+      - Talking to someone
+      - Call back
+      - Call me back
+      - Call customer service
+      - Calling customer service
+      - Please call me
+      - Please call me back
+      - Please give me a call
+      - Call support
+      - Call support now
+      - Call technical support
+      - Call tech support
+      - Can an agent call me
+      - Can an agent call me back
+      - Can I call
+      - Can I speak to someone else
+      - Can I talk to someone else
+      - Can I get support from a real agent
+      - Can I be connected to a person
+      - Can I call a number or can I be called
+      - Can a representative call me
+      - Can a representative call me back
+      - Can I schedule a phone call
+      - Can I speak with a representative
+      - Can I talk to a representative
+      - Can I speak to a human
+      - Can I talk to a human
+      - Can I speak to a person
+      - Can I talk to a person
+      - Can I speak to a human assistant
+      - Can I talk to a human assistant
+      - Can someone call me
+      - Can someone call me back
+      - Chatting with a human
+      - Chat with a human
+      - Chatting with a representative
+      - Chat with a representative
+      - Chatting with agent
+      - Chat with agent
+      - Chat with someone
+      - Chatting with someone
+      - Connect me to a live agent
+      - Please connect me to a live agent
+      - Connect me to a person
+      - Please connect me to a person
+      - Can someone contact me by phone
+      - Can someone reach me by phone
+      - Customer agent
+      - Customer representative
+      - Customer service
+      - I would like a manager to contact me
+      - I would like a manager to reach out to me
+      - I need customer service
+      - I need the customer service
+      - I need help from a person
+      - I would like to speak with a live agent
+      - I would like to talk to a live agent
+      - I would like to speak with a specialist
+      - I would like to talk to a specialist
+      - I would like to speak with customer service
+      - I would like to talk to customer service
+      - I would like to receive live support
+      - I would like to speak with a consultant
+      - I would like to talk to a consultant
+      - I would like to speak with a live technician
+      - I would like to talk to a live technician
+      - I would like to speak with an employee
+      - I would like to talk to an employee
+      - I would like to speak with a technician
+      - I would like to talk to a technician
+      - Talk to technical support agent
+      - Speak to technical support agent
+
+  actions:
+    - kind: SendActivity
+      id: sendMessage_s39DCt
+      activity: |-
+        Escalation to a human agent is currently not configured for this copilot, but this is where the agent can provide information about how to contact someone another way.
+
+        Is there anything else I can help you with?

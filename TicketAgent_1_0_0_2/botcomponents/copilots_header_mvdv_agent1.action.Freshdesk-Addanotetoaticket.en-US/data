@@ -1,0 +1,3 @@
+kind: TaskDialog
+modelDisplayName: Add a note to a ticket
+modelDescription: Add a private or public note to a ticket.

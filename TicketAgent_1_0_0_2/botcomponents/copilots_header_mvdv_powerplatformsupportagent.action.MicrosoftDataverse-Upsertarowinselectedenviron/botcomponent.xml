@@ -1,0 +1,10 @@
+<botcomponent schemaname="copilots_header_mvdv_powerplatformsupportagent.action.MicrosoftDataverse-Upsertarowinselectedenviron">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>Microsoft Dataverse - Upsert a row in selected environment</name>
+  <parentbotid>
+    <schemaname>copilots_header_mvdv_powerplatformsupportagent</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

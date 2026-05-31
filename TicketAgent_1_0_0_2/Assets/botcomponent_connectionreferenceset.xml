@@ -1,0 +1,44 @@
+<botcomponent_connectionreferenceset>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.action.Freshdesk-Addanotetoaticket" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_freshdesk.db4f1c5441524ad8ba651f218f8d6a9c">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.action.Freshdesk-Getticket" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_freshdesk.f227998aa1e04280b5acf11c0fd13082">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.action.Freshdesk-Updateaticket" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_freshdesk.db4f1c5441524ad8ba651f218f8d6a9c">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.action.MicrosoftDataverse-Listrowsfromselectedenvironment" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.topic.01-Getticketinfo" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.topic.01-Getticketinfo" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_office365.shared-office365-6faa917e-232a-4bbe-8cbc-c3cd6aee2a5b">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.topic.02-Getticketinfo" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_agent1.topic.02-Getticketinfo" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_agent1.shared_freshdesk.db4f1c5441524ad8ba651f218f8d6a9c">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.action.Freshdesk-Addanotetoaticket" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_powerplatformsupportagent.shared_freshdesk.f227998aa1e04280b5acf11c0fd13082">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.action.Freshdesk-Createaticket" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_powerplatformsupportagent.shared_freshdesk.f227998aa1e04280b5acf11c0fd13082">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.action.MicrosoftDataverse-Upsertarowinselectedenviron" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_powerplatformsupportagent.shared_commondataserviceforapps.shared-commondataser-24c18e81-614e-4893-8b6b-2b332dd03e77">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.action.MicrosoftLearnDocsMCP-MicrosoftLearnDocsMC_W9-" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_powerplatformsupportagent.shared_microsoftlearndocsmcpserver.ff46762685a44b7e8fce395af42d8341">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.action.MicrosoftLearnDocsMCP-MicrosoftLearnDocsMCPSer" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_powerplatformsupportagent.shared_microsoftlearndocsmcpserver.ff46762685a44b7e8fce395af42d8341">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="copilots_header_mvdv_powerplatformsupportagent.action.Office365Outlook-SendanemailV2" connectionreferenceid.connectionreferencelogicalname="copilots_header_mvdv_powerplatformsupportagent.shared_office365.shared-office365-6faa917e-232a-4bbe-8cbc-c3cd6aee2a5b">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+</botcomponent_connectionreferenceset>

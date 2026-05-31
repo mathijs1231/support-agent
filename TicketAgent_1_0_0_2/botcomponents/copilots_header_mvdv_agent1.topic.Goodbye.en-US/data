@@ -1,0 +1,32 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnRecognizedIntent
+  id: main
+  intent:
+    displayName: Goodbye
+    triggerQueries:
+      - Goodbye
+      - Farewell for now
+      - See you again
+      - Have a good day
+      - Have a great day
+      - No thanks and goodbye
+      - No thanks. Goodbye
+      - No thanks. Goodbye.
+      - No thank you. Goodbye.
+      - No thank you. Bye.
+      - See you later
+
+  actions:
+    - kind: Question
+      id: question_zf2HhP
+      prompt: Do you want to end our conversation?
+
+    - kind: ConditionGroup
+      id: condition_DGc1Wy
+      conditions:
+        - id: condition_DGc1Wy-item-1
+          actions:
+            - kind: SendActivity
+              id: sendMessage_LdLhmf
+              activity: Go ahead. I'm listening.

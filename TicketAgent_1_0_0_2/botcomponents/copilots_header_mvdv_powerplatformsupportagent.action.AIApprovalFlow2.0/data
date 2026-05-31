@@ -1,0 +1,30 @@
+kind: TaskDialog
+inputs:
+  - kind: AutomaticTaskInput
+    propertyName: text
+    description: "Use the payload from the trigger as input where the Flow Id can be found as: mvdv_instanceid"
+
+  - kind: AutomaticTaskInput
+    propertyName: text_1
+    description: "Use the payload from the trigger as input where the Flow Id can be found as: mvdv_environmentid"
+
+  - kind: AutomaticTaskInput
+    propertyName: text_2
+    description: "Use the payload from the trigger as input where the Flow Id can be found as: mvdv_platform"
+
+  - kind: AutomaticTaskInput
+    propertyName: text_3
+    description: "Use the payload from the trigger as input where the Flow Id can be found as: mvdv_supportrequestid"
+
+outputs:
+  - propertyName: outcome
+
+action:
+  kind: InvokeFlowTaskAction
+  flowId: dfb4fbbf-8452-f111-bec6-7ced8d76b3cc
+  connectionProperties:
+    $kind: ConnectionProperties
+    diagnostics:
+    mode: Invoker
+
+outputMode: All
